@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 
 const LogIn = () => {
    const [showPass, setShowPass] = useState(false);
-   const { loginWithEmailPass} = useAuth();
+   const { loginWithEmailPass, googleLogin } = useAuth();
    const navigate = useNavigate()
    const loc = useLocation();
    // logOut()
@@ -40,6 +40,20 @@ const LogIn = () => {
             })
          })
 
+   }
+
+   // Login with Google Account
+   const handleGoogleLogin = () => {
+      googleLogin()
+         .then(result => {
+            console.log(result.user);
+            Swal.fire({
+               icon: 'success',
+               title: ' Signin successfull',
+            })
+            navigate(loc?.state ? loc.state : '/')
+         })
+         .catch(error => { console.error(error.message) })
    }
    return(
       <div>
@@ -83,7 +97,7 @@ const LogIn = () => {
                      </form>
 
                      <div className="flex flex-col justify-center items-center  ">
-                        <div
+                        <div onClick={handleGoogleLogin}
                            className="cursor-pointer group border-white group  mt-5 inline-flex h-12 w-full items-center justify-center gap-2   border px-4 py-2 transition-colors duration-300  hover:bg-[#34A353] hover:border-[#34A353] focus:outline-none">
                            <span>
                               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
