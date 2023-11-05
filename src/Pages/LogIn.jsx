@@ -1,13 +1,48 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import Lottie from "lottie-react";
 import login from "../assets/Lottie/loginPage.json";
+import useAuth from "../Hooks/useAuth";
+import Swal from "sweetalert2";
+
+
 const LogIn = () => {
-   const[showPass, setShowPass] = useState(false);
+   const [showPass, setShowPass] = useState(false);
+   const { loginWithEmailPass} = useAuth();
+   const navigate = useNavigate()
+   const loc = useLocation();
+   // logOut()
+   const handleLogIn = e => {
+      e.preventDefault();
+      const form = new FormData(e.currentTarget);
+      const email = form.get('email')
+      const password = form.get('password')
+      console.log(email, password);
+      
+      // Login with email and password
+      loginWithEmailPass(email, password)
+         .then(res => {
+            console.log(res.user);
+            Swal.fire({
+               icon: 'success',
+               title: 'Sucessfully logged in',
+               text: `Welcome!`,
+            })
+            navigate(loc?.state ? loc.state : '/')
+         })
+         .catch(error => {
+            console.error(error.message);
+            Swal.fire({
+               icon: 'error',
+               title: 'Ivalid Email or Password',
+               text: `Try Again!`,
+            })
+         })
+
+   }
    return(
       <div>
-
          <div className="container mx-auto flex min-h-[calc(100vh-100px)] items-center justify-center px-2">
             <div className="hidden md:block">
                <Lottie className=" " animationData={login} loop={true} />
@@ -17,7 +52,7 @@ const LogIn = () => {
                   <div className="py-10 text-center text-5xl text-white font-bold">LogIn</div>
                   <div className=" pb-16 px-5 lg:px-10 flex  w-full flex-col  ">
 
-                     <form className=" space-y-8  text-center">
+                     <form onSubmit={handleLogIn} className=" space-y-8  text-center">
                         <div className="group relative">
                            <input
                               type="email" name="email" id="email" required className="peer h-14 w-full  bg-gray-100 px-4 text-sm outline-none" />

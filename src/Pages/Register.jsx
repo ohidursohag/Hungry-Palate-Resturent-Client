@@ -1,10 +1,92 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { useState } from "react";
 import Lottie from "lottie-react";
 import login from "../assets/Lottie/loginPage.json";
+import useAuth from "../Hooks/useAuth";
+import Swal from "sweetalert2";
+import { updateProfile } from "firebase/auth";
+
 const Register = () => {
    const [showPass, setShowPass] = useState(false);
+   const { registerWithEmailPass } = useAuth()
+   const navigate = useNavigate()
+   const loc = useLocation();
+   const handleRegister = (e) => {
+      e.preventDefault();
+      const form = new FormData(e.currentTarget)
+      const name = form.get('name')
+      const photo = form.get('photoUrl')
+      const email = form.get('email')
+      const password = form.get('password')
+      const terms = form.get('terms')
+      // console.log(email, password, terms, name, photo);
+
+
+      // Check PasWord Validation
+      if (password.length < 6) {
+         Swal.fire({
+            icon: 'error',
+            title: 'Password must be 6 characters or more',
+            showConfirmButton: false,
+            timer: 1500
+         })
+         return;
+      }
+      else if (!/[A-Z]/.test(password)) {
+         Swal.fire({
+            icon: 'error',
+            title: 'Password must be contain atleast one Uppercase character',
+            showConfirmButton: false,
+            timer: 1500
+         })
+         return;
+      }
+      else if (!/[@$! %*?&]/.test(password)) {
+         Swal.fire({
+            icon: 'error',
+            title: 'Password must be contain atleast one Special character',
+            showConfirmButton: false,
+            timer: 1500
+         })
+         return;
+      }
+      if (!terms) {
+         Swal.fire({
+            icon: 'error',
+            title: 'You must agree to the terms and conditions',
+            showConfirmButton: false,
+            timer: 1500
+         })
+         return;
+      }
+
+
+      // Create a new user account
+      registerWithEmailPass(email, password)
+         .then(result => {
+            console.log(result.user);
+
+            updateProfile(result.user, { displayName: name, photoURL: photo })
+               .then(result => { console.log(result.user) })
+               .catch(error => { console.error(error.message) })
+
+            Swal.fire({
+               icon: 'success',
+               title: 'Sucessfully Registered',
+            })
+            navigate(loc?.state ? loc.state : '/')
+         })
+         .catch(error => {
+            console.error(error.message);
+            Swal.fire({
+               icon: 'error',
+               title: 'You are already registered',
+               text: `Please Login!`,
+            })
+            navigate('/login')
+         })
+   }
    return(
       <div>
          <div className="container mx-auto flex min-h-[calc(100vh-100px)]  items-center justify-center px-2 py-10">
@@ -15,7 +97,7 @@ const Register = () => {
                <div className=" w-[350px] sm:w-[450px] md:w-[400px] lg:w-[450px]  bg-[#DCB342]/60">
                   <div className="py-10 text-center text-5xl text-white font-bold">Register</div>
                   <div className=" pb-10 px-5 lg:px-10 flex  w-full flex-col ">
-                     <form className="text-center">
+                     <form onSubmit={handleRegister} className="text-center">
                         <div className="group relative mb-7">
                            <input type="text" id="name" name="name" required className="peer h-14 w-full  bg-gray-100 px-4 text-sm outline-none" />
                            <label htmlFor="name" className="absolute left-2 top-0 flex h-full transform items-center pl-2 text-base transition-all duration-500 group-focus-within:-top-7 group-focus-within:h-1/2 group-focus-within:pl-0 group-focus-within:text-base group-focus-within:text-white peer-valid:-top-7 peer-valid:h-1/2 peer-valid:pl-0 peer-valid:text-base peer-valid:text-white">Your Name</label>
