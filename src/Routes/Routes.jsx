@@ -4,6 +4,10 @@ import Home from "../Pages/Home";
 import MyAddedFoodItems from "../Pages/MyAddedFoodItems";
 import AddFoodItems from "../Pages/AddFoodItems";
 import MyFoodCart from "../Pages/MyFoodCart";
+import Blog from "../Pages/Blog";
+import LogIn from "../Pages/LogIn";
+import Register from "../Pages/Register";
+import AllFoodItems from "../Pages/AllFoodItems";
 
 const mycreatedRoute = createBrowserRouter([
    {
@@ -16,15 +20,19 @@ const mycreatedRoute = createBrowserRouter([
          },
          {
             path:'blog',
-            element: <Home/>
+            element: <Blog/>
          },
          {
-            path: '/login',
-            // element: <Login />,
+            path: 'login',
+            element: <LogIn />,
          },
          {
-            path: '/register',
-            // element: <Register />,
+            path: 'register',
+            element: <Register />,
+         },
+         {
+            path: 'all-foods',
+            element: <AllFoodItems />,
          },
       ]
    },
