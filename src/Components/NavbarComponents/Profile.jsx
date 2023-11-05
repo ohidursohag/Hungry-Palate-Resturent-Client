@@ -7,7 +7,7 @@ const Profile = () => {
             <button className="btn btn-circle md:btn-md p-0 mx-auto">
                <img src={avaterPlaceHolder} />
             </button>
-         <div tabIndex={0} className="dropdown-content  z-[1] menu pt-5 md:shadow md:bg-base-100 rounded-lg w-max md:right-0 top-[40px] space-y-4">
+         <div tabIndex={0} className="dropdown-content  z-[1] menu pt-5 md:shadow md:bg-base-100 rounded-lg w-max md:right-0 top-[50px] space-y-4">
  
             <NavLink to="/user/my-food-cart" className={({ isActive }) => isActive ? 'btn  bg-[#DCB342]/70 hover:bg-[#DCB342] rounded-[4px] text-black border-none btn-sm  normal-case' : 'btn btn-ghost rounded-[4px] btn-sm normal-case'}>
                   My Cart

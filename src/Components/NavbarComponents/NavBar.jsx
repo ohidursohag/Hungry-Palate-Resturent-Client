@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const NavBar = () => {
    return (
       <div>
-         <div className="container mx-auto navbar  justify-between">
+         <div className="container mx-auto navbar py-5  justify-between">
 
             <Link to="/">
                <img className='w-[150px]' src={logo} alt="" />
