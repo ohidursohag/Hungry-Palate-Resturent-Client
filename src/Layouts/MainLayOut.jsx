@@ -1,9 +1,11 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigation } from "react-router-dom";
 import NavBar from "../Components/NavbarComponents/NavBar";
 import SideBar from "../Components/NavbarComponents/SideBar";
+import LoadingAnimation from "../Components/Shared/LoadingAnimation/LoadingAnimation";
 
 
 const MainLayOut = () => {
+   const navigation = useNavigation()
    return(
       <div className="drawer drawer-end">
          <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -11,7 +13,10 @@ const MainLayOut = () => {
             {/* Navbar */}
             <NavBar></NavBar>
             {/* Page content here */}
-            <Outlet></Outlet>
+            {
+               navigation.state === 'loading' ? <LoadingAnimation /> : <Outlet></Outlet>
+            }
+            
          </div>
          <SideBar></SideBar>
       </div>
