@@ -1,4 +1,4 @@
-import FoodItemDataForm from "../Components/FoodItemDataForm/FoodItemDataForm";
+import FoodItemDataForm from "../Components/Forms/FoodItemDataForm";
 import Title from "../Components/Shared/Title";
 import useAuth from "../Hooks/useAuth";
 
@@ -10,25 +10,25 @@ const AddFoodItems = () => {
       e.preventDefault()
       const form = e.target;
       const newFoodItem = {
-         foodName: form.foodName.value ||'Not Available',
-         quantity: form.quantity.value ||'Not Available',
-         category: form.category.value ||'Not Available',
-         foodImage: form.foodImage.value ||'Not Available',
-         foodPrice: form.foodPrice.value ||'Not Available',
-         foodRatings: form.foodRatings.value ||'Not Available',
-         foodOwnerName: `${ user?.email }`||'Not Available',
-         foodOwnerEmail: `${user?.displayName}` ||'Not Available',
+         foodName: form.foodName.value || 'Not Available',
+         quantity: form.quantity.value || 'Not Available',
+         category: form.category.value || 'Not Available',
+         foodImage: form.foodImage.value || 'Not Available',
+         foodPrice: form.foodPrice.value || 'Not Available',
+         foodRatings: form.foodRatings.value || 'Not Available',
+         foodOwnerName: `${user?.email}` || 'Not Available',
+         foodOwnerEmail: `${user?.displayName}` || 'Not Available',
          foodOrigin: form.foodOrigin.value || 'Not Available',
          shortDescription: {
             testOrFlavor: form.testOrFlavor.value || 'Not Available',
             ingredients: form.ingredients.value || 'Not Available',
             makingProcess: form.makingProcess.value || 'Not Available',
          },
-         totalOrderCount: 0 ,        
+         totalOrderCount: 0,
       }
-console.log(newFoodItem);
+      console.log(newFoodItem);
    }
-   return(
+   return (
       <div className="container mx-auto py-10 px-2">
          <div className="my-10">
             <Title>Add Food Items</Title>
@@ -37,5 +37,6 @@ console.log(newFoodItem);
             <FoodItemDataForm buttonName={'Add Item'}></FoodItemDataForm>
          </form>
       </div>
-   )}
+   )
+}
 export default AddFoodItems;

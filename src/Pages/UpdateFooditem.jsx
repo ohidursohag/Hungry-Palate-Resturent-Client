@@ -1,4 +1,4 @@
-import FoodItemDataForm from "../Components/FoodItemDataForm/FoodItemDataForm";
+import FoodItemDataForm from "../Components/Forms/FoodItemDataForm";
 import Title from "../Components/Shared/Title";
 
 
@@ -23,7 +23,7 @@ const UpdateFooditem = () => {
       }
       console.log(updatedFoodData);
    }
-   return(
+   return (
       <div className="container mx-auto py-10 px-2">
          <div className="my-10">
             <Title>Update Food Items</Title>
@@ -32,5 +32,6 @@ const UpdateFooditem = () => {
             <FoodItemDataForm buttonName={'Update'}></FoodItemDataForm>
          </form>
       </div>
-   )}
+   )
+}
 export default UpdateFooditem;
