@@ -49,7 +49,7 @@ const LoginAndProfile = () => {
                   </div>
                </>
                : <NavLink to={location.pathname === '/login' ? '/register' : location.pathname === '/register' ? '/login' : '/login'}>
-                  <span className={` btn btn-ghost rounded-[4px] btn-sm normal-case text-lg ${location.pathname === '/login' || location.pathname === '/register' ? 'btn  bg-[#DCB342]/70 hover:bg-[#DCB342] rounded-[4px] text-black border-none btn-sm  normal-case' : ''} `} >{location.pathname === '/login' ? 'Register' : location.pathname === '/register' ? 'Login' : 'Login'}</span>
+                  <span className={` btn btn-ghost rounded-[4px] btn-sm normal-case text-lg w-full ${location.pathname === '/login' || location.pathname === '/register' ? 'btn  bg-[#DCB342]/70 hover:bg-[#DCB342] rounded-[4px] text-black border-none btn-sm  normal-case ' : ''} `} >{location.pathname === '/login' ? 'Register' : location.pathname === '/register' ? 'Login' : 'Login'}</span>
                </NavLink>
          }
 

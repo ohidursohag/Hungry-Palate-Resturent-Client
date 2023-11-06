@@ -8,11 +8,13 @@ import Blog from "../Pages/Blog";
 import LogIn from "../Pages/LogIn";
 import Register from "../Pages/Register";
 import AllFoodItems from "../Pages/AllFoodItems";
+import Error from "../Pages/Error";
 
 const mycreatedRoute = createBrowserRouter([
    {
       path: '/',
       element: <MainLayOut></MainLayOut>,
+      errorElement: <Error></Error>,
       children: [
          {
             index: true,
