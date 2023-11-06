@@ -1,4 +1,4 @@
-import logo from '../../assets/logo/logo_2.png'
+import logo from '../../../assets/logo/logo_2.png'
 import { AiOutlineMenu } from 'react-icons/ai'
 import NavLinks from './NavLinks';
 import LoginAndProfile from './LoginAndProfile';
