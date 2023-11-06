@@ -9,6 +9,7 @@ import LogIn from "../Pages/LogIn";
 import Register from "../Pages/Register";
 import AllFoodItems from "../Pages/AllFoodItems";
 import Error from "../Pages/Error";
+import UpdateFooditem from "../Pages/UpdateFooditem";
 
 const mycreatedRoute = createBrowserRouter([
    {
@@ -43,12 +44,16 @@ const mycreatedRoute = createBrowserRouter([
       element: <MainLayOut></MainLayOut>,
       children: [
          {
-            path: 'my-added-food',
+            path: 'my-added-foods',
             element: <MyAddedFoodItems></MyAddedFoodItems>
          },
          {
             path: 'add-food',
             element: <AddFoodItems></AddFoodItems>
+         },
+         {
+            path: 'update-food',
+            element: <UpdateFooditem></UpdateFooditem>
          },
          {
             path: 'my-food-cart',

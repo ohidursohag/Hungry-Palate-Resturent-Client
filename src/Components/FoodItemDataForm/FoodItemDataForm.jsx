@@ -50,11 +50,7 @@ const FoodItemDataForm = ({ buttonName, existingfoodData }) => {
                   </div>
                </div>
                
-
-              
                {/* 4 */}
-
-               {/* 5 */}
                <div className='md:flex gap-5 space-y-5 md:space-y-0'>
                   
                   <div className='w-full'>
@@ -66,7 +62,7 @@ const FoodItemDataForm = ({ buttonName, existingfoodData }) => {
                      <textarea type="text" rows={3} name="testOrFlavor" defaultValue={''} id="testOrFlavor" placeholder="Enter Test/Flavor" className="   w-full pt-1  mt-1 rounded-[4px]  bg-white px-4   outline-none" />
                   </div>
                </div>
-               {/* 6 */}
+               {/* 5 */}
                <div className='md:flex gap-5 space-y-5 md:space-y-0'>
                   <div className='w-full'>
                      <label htmlFor="ingredients" className="text-xl font-medium ">Ingredients</label>
