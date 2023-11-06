@@ -1,9 +1,12 @@
+import TopFoods from "../Components/Home/TopFoodSection/TopFoods";
 
 
 const Home = () => {
    return(
       <div>
-          <p> HELLO I Am Home </p>
+         <div className="py-[100px]">
+            <TopFoods></TopFoods>
+          </div>
       </div>
    )}
 export default Home;

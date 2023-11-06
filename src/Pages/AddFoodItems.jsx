@@ -1,11 +1,8 @@
 import FoodItemDataForm from "../Components/Forms/FoodItemDataForm";
 import Title from "../Components/Shared/Title";
-import useAuth from "../Hooks/useAuth";
 
 
 const AddFoodItems = () => {
-   const { user } = useAuth()
-   // console.log(user?.displayName);
    const handleAddNewFoodItem = (e) => {
       e.preventDefault()
       const form = e.target;
@@ -16,8 +13,8 @@ const AddFoodItems = () => {
          foodImage: form.foodImage.value || 'Not Available',
          foodPrice: form.foodPrice.value || 'Not Available',
          foodRatings: form.foodRatings.value || 'Not Available',
-         foodOwnerName: `${user?.email}` || 'Not Available',
-         foodOwnerEmail: `${user?.displayName}` || 'Not Available',
+         foodOwnerName: form.foodOwnerName.value || 'Not Available',
+         foodOwnerEmail: form.foodOwnerEmail.value || 'Not Available',
          foodOrigin: form.foodOrigin.value || 'Not Available',
          shortDescription: {
             testOrFlavor: form.testOrFlavor.value || 'Not Available',

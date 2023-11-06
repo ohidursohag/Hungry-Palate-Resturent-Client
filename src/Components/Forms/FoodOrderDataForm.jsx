@@ -49,7 +49,7 @@ const FoodOrderDataForm = () => {
                      </div>
                   </div>
 
-                  {/* 3 */}
+                  {/* 2 */}
                   <div className='md:flex gap-5 space-y-5 md:space-y-0'>
                      <div className='w-full'>
                         <label htmlFor="foodPrice" className="text-xl font-medium ">Price</label>
@@ -61,7 +61,7 @@ const FoodOrderDataForm = () => {
                      </div>
                   </div>
 
-                  {/* 4 */}
+                  {/* 3 */}
                   <div className='md:flex gap-5 space-y-5 md:space-y-0'>
 
                      <div className='w-full'>

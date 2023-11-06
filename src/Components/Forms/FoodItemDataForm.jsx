@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
+import useAuth from '../../Hooks/useAuth';
 const FoodItemDataForm = ({ buttonName, existingfoodData }) => {
    const { foodName, foodImage, quantity, foodRatings, category, foodPrice, } = existingfoodData || {};
-
+   const { user } = useAuth()
    return (
       <div className=" py-10 w-full ">
          <div className="w-[90%] mx-auto">
@@ -49,8 +50,20 @@ const FoodItemDataForm = ({ buttonName, existingfoodData }) => {
                      <input type="number" step="0.1" min={0} max={5} name="foodRatings" defaultValue={foodRatings} id="foodRatings" placeholder="Enter food Ratings" className="  h-14 w-full mt-1 rounded-[4px]  bg-white px-4  outline-none" />
                   </div>
                </div>
-               
                {/* 4 */}
+               <div className='md:flex gap-5 space-y-5 md:space-y-0'>
+
+                  <div className='w-full'>
+                     <label htmlFor="foodOwnerName" className="text-xl font-medium ">Food Owner Name</label>
+                     <input type="text" readOnly name="foodOwnerName" defaultValue={user?.displayName} id="foodOwnerName" className=" h-14 w-full mt-1 rounded-[4px]  bg-white px-4  outline-none" />
+                  </div>
+                  <div className='w-full'>
+                     <label htmlFor="foodOwnerEmail" className="text-xl font-medium ">Food Owner Email</label>
+                     <input type="email" readOnly name="foodOwnerEmail" defaultValue={user?.email} id="foodOwnerEmail" placeholder="Enter Food Origin" className=" h-14 w-full mt-1 rounded-[4px]  bg-white px-4  outline-none" />
+                  </div>
+
+               </div>
+               {/* 5 */}
                <div className='md:flex gap-5 space-y-5 md:space-y-0'>
                   
                   <div className='w-full'>
@@ -62,7 +75,7 @@ const FoodItemDataForm = ({ buttonName, existingfoodData }) => {
                      <textarea type="text" rows={3} name="testOrFlavor" defaultValue={''} id="testOrFlavor" placeholder="Enter Test/Flavor" className="   w-full pt-1  mt-1 rounded-[4px]  bg-white px-4   outline-none" />
                   </div>
                </div>
-               {/* 5 */}
+               {/* 6 */}
                <div className='md:flex gap-5 space-y-5 md:space-y-0'>
                   <div className='w-full'>
                      <label htmlFor="ingredients" className="text-xl font-medium ">Ingredients</label>
