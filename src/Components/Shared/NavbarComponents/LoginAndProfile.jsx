@@ -2,6 +2,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import Profile from "./Profile";
 import useAuth from "../../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 
 const LoginAndProfile = () => {
@@ -19,15 +20,16 @@ const LoginAndProfile = () => {
          cancelButtonColor: '#d33',
          confirmButtonText: 'Confirm'
       }).then(async (result) => {
+         const toastId = toast.loading('Logging Out ...');
          if (result.isConfirmed) {
             logOut()
                .then(() => {
-                  Swal.fire({
-                     icon: 'success',
-                     title: 'Sucessfully Signed Out',
-                  })
+                  toast.success('Logged Out Successfull', { id: toastId });
                })
-               .catch(err => { console.error(err.message) })
+               .catch(err => {
+                  console.error(err.message);
+                  toast.error(err.message, { id: toastId });
+               })
          }
 
       })

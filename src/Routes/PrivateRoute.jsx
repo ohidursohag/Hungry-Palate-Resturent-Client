@@ -8,10 +8,10 @@ const PrivateRoute = ({ children }) => {
    if (loading) {
       return <LoadingAnimation></LoadingAnimation>
    }
-   if (user) {
+   if (!loading && !user?.email) {
+      return <Navigate state={loc.pathname} to='/login'></Navigate>;
+   } 
       return children;
-   }
-   return <Navigate state={loc.pathname} to='/login'></Navigate>
 };
 
 PrivateRoute.propTypes = {

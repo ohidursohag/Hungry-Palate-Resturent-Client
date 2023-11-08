@@ -6,6 +6,7 @@ import login from "../assets/Lottie/loginPage.json";
 import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { updateProfile } from "firebase/auth";
+import toast from "react-hot-toast";
 
 const Register = () => {
    const [showPass, setShowPass] = useState(false);
@@ -62,7 +63,7 @@ const Register = () => {
          })
          return;
       }
-
+const toastId = toast.loading('Registering ...')
       // Create a new user account
       registerWithEmailPass(email, password)
          .then(result => {
@@ -72,34 +73,28 @@ const Register = () => {
                .then(result => { console.log(result.user) })
                .catch(error => { console.error(error.message) })
 
-            Swal.fire({
-               icon: 'success',
-               title: 'Sucessfully Registered',
-            })
+            toast.success('Registration Successfull and Logged In',{id:toastId})
             navigate(loc?.state ? loc.state : '/')
          })
          .catch(error => {
             console.error(error.message);
-            Swal.fire({
-               icon: 'error',
-               title: 'You are already registered',
-               text: `Please Login!`,
-            })
+            toast.error(error.message, { id: toastId });
             navigate('/login')
          })
    }
 
    const handleRegisterWithGoogle = () => {
+      const toastId = toast.loading('Registering ...')
       googleLogin()
          .then(result => {
             console.log(result.user);
-            Swal.fire({
-               icon: 'success',
-               title: 'Sucessfully Registered',
-            })
+            toast.success('Registration Successfull and Logged In', { id: toastId })
             navigate(loc?.state ? loc.state : '/')
          })
-         .catch(error => { console.error(error.message) })
+         .catch(error => {
+            console.error(error.message);
+            toast.error(error.message, { id: toastId });
+         })
    }
    return(
       <div>

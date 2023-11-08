@@ -12,6 +12,7 @@ import Error from "../Pages/Error";
 import UpdateFooditem from "../Pages/UpdateFooditem";
 import PrivateRoute from "./PrivateRoute";
 import OrderFoodItem from "../Pages/OrderFoodItem";
+import FoodDetails from "../Pages/FoodDetails";
 
 const mycreatedRoute = createBrowserRouter([
    {
@@ -38,6 +39,10 @@ const mycreatedRoute = createBrowserRouter([
          {
             path: 'all-foods',
             element: <AllFoodItems />,
+         },
+         {
+            path: 'all-foods/:id',
+            element: <FoodDetails />,
          },
       ]
    },

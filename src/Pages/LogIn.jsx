@@ -4,7 +4,7 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import Lottie from "lottie-react";
 import login from "../assets/Lottie/loginPage.json";
 import useAuth from "../Hooks/useAuth";
-import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 
 const LogIn = () => {
@@ -12,48 +12,41 @@ const LogIn = () => {
    const { loginWithEmailPass, googleLogin } = useAuth();
    const navigate = useNavigate()
    const loc = useLocation();
-   // logOut()
-   const handleLogIn = e => {
+   const handleLogIn = async (e) => {
       e.preventDefault();
       const form = new FormData(e.currentTarget);
-      const email = form.get('email')
-      const password = form.get('password')
-      console.log(email, password);
-      
+      const email = form.get('email');
+      const password = form.get('password');
+      // console.log(email, password);
+
+      const toastId = toast.loading('Logging in ...');
       // Login with email and password
       loginWithEmailPass(email, password)
          .then(res => {
-            console.log(res.user);
-            Swal.fire({
-               icon: 'success',
-               title: 'Sucessfully logged in',
-               text: `Welcome!`,
-            })
+            console.log(res.user);           
+            toast.success('Logged in', { id: toastId });
             navigate(loc?.state ? loc.state : '/')
          })
          .catch(error => {
-            console.error(error.message);
-            Swal.fire({
-               icon: 'error',
-               title: 'Ivalid Email or Password',
-               text: `Try Again!`,
-            })
+            console.error(error.message);           
+            toast.error(error.message, { id: toastId });
          })
 
    }
 
    // Login with Google Account
    const handleGoogleLogin = () => {
+      const toastId = toast.loading('Logging in ...');
       googleLogin()
          .then(result => {
             console.log(result.user);
-            Swal.fire({
-               icon: 'success',
-               title: ' Signin successfull',
-            })
+            toast.success('Logged in', { id: toastId });
             navigate(loc?.state ? loc.state : '/')
          })
-         .catch(error => { console.error(error.message) })
+         .catch(error => {
+            console.error(error.message)
+            toast.error(error.message, { id: toastId });
+         })
    }
    return(
       <div>
