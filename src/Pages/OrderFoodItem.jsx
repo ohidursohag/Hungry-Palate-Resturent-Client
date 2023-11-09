@@ -15,11 +15,28 @@ const OrderFoodItem = () => {
    const { id } = useParams();
    // console.log(id);
    const { data: food, isLoading, isError } = useGetSingleFoodById(id);
-   const { mutate,isSuccess } = useMutation({
+   const { mutate} = useMutation({
       mutationKey: ['orderFood'],
       mutationFn: (orderdFoodData) => {
          return axios.post('/user/order-food', orderdFoodData)
-      }     
+      },
+      onSuccess: () => {
+         Swal.fire({
+            icon: "success",
+            title: "Order Successfuly updated",
+            showConfirmButton: false,
+            timer: 1500
+         });
+      },
+      throwOnError: () => {
+         Swal.fire({
+            icon: "error",
+            title: "Something went wrong",
+            text: "Please! try again",
+            showConfirmButton: false,
+            timer: 1500
+         });
+      }
    })
    // console.log(isSuccess);
    if (isLoading) {
@@ -48,22 +65,7 @@ const OrderFoodItem = () => {
       }
       
       mutate(orderdFoodData)
-      if (isSuccess) {
-         Swal.fire({
-            icon: "success",
-            title: "Order Successfull",
-            showConfirmButton: false,
-            timer: 1500
-         });
-      } else {
-         Swal.fire({
-            icon: "error",
-            title: "Something went wrong",
-            text: "Please! try again",
-            showConfirmButton: false,
-            timer: 1500
-         });
-      }
+      
       console.log(orderdFoodData);
 
    }

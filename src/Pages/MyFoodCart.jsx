@@ -12,15 +12,16 @@ const MyFoodCart = () => {
    const queryClient = useQueryClient()
    // console.log(email);
    const axios = useAxios()
-   const { data:orderData, isLoading, isError, refetch } = useQuery({
+   const { data:orderData, isLoading, isError } = useQuery({
       queryKey: ["orderedfood"],
       queryFn: async () => {
          const orderedFoods = await axios.get(`/user/orederd-food?email=${email}`);
          return orderedFoods.data;
       },
+      
    });
 
-   const { mutate, isSuccess } = useMutation({
+   const { mutate } = useMutation({
       mutationKey: ['orderedfood'],
       mutationFn: (id) => {
          return axios.delete(`/user/delete-food/${id}`)

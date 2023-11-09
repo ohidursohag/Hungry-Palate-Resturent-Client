@@ -3,8 +3,7 @@
 import PropTypes from 'prop-types'
 
 const SearchAndFilterSection = (
-   { setSortingOrder,
-      // setFilteringCategory,
+   { setSortingOrder,      // setFilteringCategory,
       query,
       setQuery,
       handleSearch,

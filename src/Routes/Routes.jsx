@@ -74,7 +74,7 @@ const mycreatedRoute = createBrowserRouter([
             </PrivateRoute>
          },
          {
-            path: 'update-food',
+            path: 'update-food/:id',
             element: <PrivateRoute>
                <UpdateFooditem></UpdateFooditem>
             </PrivateRoute>

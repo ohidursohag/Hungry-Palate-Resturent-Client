@@ -1,8 +1,12 @@
 import PropTypes from 'prop-types';
 import useAuth from '../../Hooks/useAuth';
+import useGetCatagory from '../../Hooks/useGetCatagory';
+import capitalizeWords from '../Utilities/capitalizeWords';
 const FoodItemDataForm = ({ buttonName, existingfoodData }) => {
-   const { foodName, foodImage, quantity, foodRatings, category, foodPrice, } = existingfoodData || {};
-   const { user } = useAuth()
+   const { foodName, foodImage, availableQuantity, foodOrigin, ratings, foodCategory, price, shortDescription } = existingfoodData || {};
+   const { user } = useAuth();
+   const { data: categories } = useGetCatagory();
+   // console.log(existingfoodData);
    return (
       <div className=" py-10 w-full ">
          <div className="w-[90%] mx-auto">
@@ -15,22 +19,19 @@ const FoodItemDataForm = ({ buttonName, existingfoodData }) => {
                      <input type="text" name="foodName" required defaultValue={foodName} id="foodName" placeholder="Enter food Name" className=" h-14 w-full mt-1 rounded-[4px]  bg-white px-4  outline-none" />
                   </div>
                   <div className='w-full'>
-                     <label htmlFor="quantity" className="text-xl font-medium ">Available Quantity</label>
-                     <input type="number" name="quantity" required defaultValue={quantity} id="quantity" placeholder="Enter food Quantity" className=" h-14 w-full mt-1 rounded-[4px]  bg-white px-4  outline-none" />
+                     <label htmlFor="availableQuantity" className="text-xl font-medium ">Available Quantity</label>
+                     <input type="number" name="availableQuantity" required defaultValue={availableQuantity} id="availableQuantity" placeholder="Enter food Quantity" className=" h-14 w-full mt-1 rounded-[4px]  bg-white px-4  outline-none" />
                   </div>
                </div>
                {/* 2*/}
                <div className='md:flex gap-5 space-y-5 md:space-y-0'>
                   <div className='w-full'>
-                     <label htmlFor="category" className="text-xl font-medium ">Category</label>
-                     <select className=" h-14 w-full mt-1 rounded-[4px]  bg-white px-4  outline-none" required name="category" id="category" >
-                        <option defaultValue={category}  value={category} >{category || 'Category Name'}</option>
-                        <option value="Nike" >Nike</option>
-                        <option value="Adidas">Adidas</option>
-                        <option value="Gucci">Gucci</option>
-                        <option value="Zara">Zara</option>
-                        <option value="H&M">H&M</option>
-                        <option value="Levi's">{"Levi's"}</option>
+                     <label htmlFor="foodCategory" className="text-xl font-medium ">Category</label>
+                     <select className=" h-14 w-full mt-1 rounded-[4px]  bg-white px-4  outline-none" required name="foodCategory" id="foodCategory" >
+                        <option defaultValue={foodCategory}  value={foodCategory} >{foodCategory || 'Category Name'}</option>
+                        {
+                           categories?.map(category => <option key={category._id} value={category?.categoryName}>{capitalizeWords(category?.categoryName)}</option>)
+                        }
                      </select>
                   </div>
 
@@ -42,24 +43,24 @@ const FoodItemDataForm = ({ buttonName, existingfoodData }) => {
                {/* 3 */}
                <div className='md:flex gap-5 space-y-5 md:space-y-0'>
                   <div className='w-full'>
-                     <label htmlFor="foodPrice" className="text-xl font-medium ">Price</label>
-                     <input type="number" step="0.1" min={.5} required name="foodPrice" defaultValue={foodPrice} id="foodPrice" placeholder="Enter food Price" className=" h-14 w-full mt-1 rounded-[4px]  bg-white px-4  outline-none" />
+                     <label htmlFor="price" className="text-xl font-medium ">Price</label>
+                     <input type="number" step="0.01" min={.5} required name="price" defaultValue={price} id="price" placeholder="Enter food Price" className=" h-14 w-full mt-1 rounded-[4px]  bg-white px-4  outline-none" />
                   </div>
                   <div className='w-full'>
-                     <label htmlFor="foodRatings" required className="text-xl font-medium ">food Ratings</label>
-                     <input type="number" step="0.1" min={0} max={5} name="foodRatings" defaultValue={foodRatings} id="foodRatings" placeholder="Enter food Ratings" className="  h-14 w-full mt-1 rounded-[4px]  bg-white px-4  outline-none" />
+                     <label htmlFor="ratings" className="text-xl font-medium ">food Ratings</label>
+                     <input type="number"  required step="0.1" min={0} max={5} name="ratings" defaultValue={ratings} id="ratings" placeholder="Enter food Ratings" className="  h-14 w-full mt-1 rounded-[4px]  bg-white px-4  outline-none" />
                   </div>
                </div>
                {/* 4 */}
                <div className='md:flex gap-5 space-y-5 md:space-y-0'>
 
                   <div className='w-full'>
-                     <label htmlFor="foodOwnerName" className="text-xl font-medium ">Food Owner Name</label>
-                     <input type="text" readOnly name="foodOwnerName" defaultValue={user?.displayName} id="foodOwnerName" className=" h-14 w-full mt-1 rounded-[4px]  bg-white px-4  outline-none" />
+                     <label htmlFor="chefName" className="text-xl font-medium ">Food Owner Name</label>
+                     <input type="text" readOnly name="chefName" defaultValue={user?.displayName} id="chefName" className=" h-14 w-full mt-1 rounded-[4px]  bg-white px-4  outline-none" />
                   </div>
                   <div className='w-full'>
-                     <label htmlFor="foodOwnerEmail" className="text-xl font-medium ">Food Owner Email</label>
-                     <input type="email" readOnly name="foodOwnerEmail" defaultValue={user?.email} id="foodOwnerEmail" placeholder="Enter Food Origin" className=" h-14 w-full mt-1 rounded-[4px]  bg-white px-4  outline-none" />
+                     <label htmlFor="chefEmail" className="text-xl font-medium ">Food Owner Email</label>
+                     <input type="email" readOnly name="chefEmail" defaultValue={user?.email} id="chefEmail" placeholder="Enter Food Origin" className=" h-14 w-full mt-1 rounded-[4px]  bg-white px-4  outline-none" />
                   </div>
 
                </div>
@@ -68,22 +69,22 @@ const FoodItemDataForm = ({ buttonName, existingfoodData }) => {
                   
                   <div className='w-full'>
                      <label htmlFor="foodOrigin"  className="text-xl font-medium ">Food Origin</label>
-                     <input type="text" name="foodOrigin" defaultValue={''} id="foodOrigin" placeholder="Enter Food Origin" className=" h-[77px] w-full mt-1 rounded-[4px]  bg-white px-4  outline-none" />
+                     <input type="text" name="foodOrigin" defaultValue={foodOrigin} id="foodOrigin" placeholder="Enter Food Origin" className=" h-[77px] w-full mt-1 rounded-[4px]  bg-white px-4  outline-none" />
                   </div>
                   <div className='w-full'>
-                     <label htmlFor="testOrFlavor" className="text-xl font-medium ">Test/Flavor</label>
-                     <textarea type="text" rows={3} name="testOrFlavor" defaultValue={''} id="testOrFlavor" placeholder="Enter Test/Flavor" className="   w-full pt-1  mt-1 rounded-[4px]  bg-white px-4   outline-none" />
+                     <label htmlFor="TasteAndFlavor" className="text-xl font-medium ">Test/Flavor</label>
+                     <textarea type="text" rows={3} name="TasteAndFlavor" defaultValue={shortDescription?.TasteAndFlavor} id="TasteAndFlavor" placeholder="Enter Test/Flavor" className="   w-full pt-1  mt-1 rounded-[4px]  bg-white px-4   outline-none" />
                   </div>
                </div>
                {/* 6 */}
                <div className='md:flex gap-5 space-y-5 md:space-y-0'>
                   <div className='w-full'>
-                     <label htmlFor="ingredients" className="text-xl font-medium ">Ingredients</label>
-                     <textarea type="text" rows={3} name="ingredients" defaultValue={''} id="ingredients" placeholder="Enter ingredients" className="   w-full pt-1  mt-1 rounded-[4px]  bg-white px-4   outline-none" />
+                     <label htmlFor="Ingredients" className="text-xl font-medium ">Ingredients</label>
+                     <textarea type="text" rows={3} name="Ingredients" defaultValue={shortDescription?.Ingredients} id="Ingredients" placeholder="Enter Ingredients" className="   w-full pt-1  mt-1 rounded-[4px]  bg-white px-4   outline-none" />
                   </div>
                   <div className='w-full'>
-                     <label htmlFor="makingProcess" className="text-xl font-medium ">Making Process</label>
-                     <textarea type="text" rows={3} name="makingProcess" defaultValue={''} id="makingProcess" placeholder="Enter Making Process" className="   w-full pt-1  mt-1 rounded-[4px]  bg-white px-4   outline-none" />
+                     <label htmlFor="MakingProcedure" className="text-xl font-medium ">Making Process</label>
+                     <textarea type="text" rows={3} name="MakingProcedure" defaultValue={shortDescription?.MakingProcedure} id="MakingProcedure" placeholder="Enter Making Process" className="   w-full pt-1  mt-1 rounded-[4px]  bg-white px-4   outline-none" />
                   </div>
                </div>
             </div>
