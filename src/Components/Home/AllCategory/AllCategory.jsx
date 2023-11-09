@@ -6,8 +6,8 @@ import Title from "../../Shared/Title";
 const AllCategory = () => {
    const {data:categories} = useGetCatagory()
    return(
-      <div>
-         <div className="py-[100px]">
+      <div className=" mb-[100px]">
+         <div className="mb-5">
             <Title>All Category</Title>
          </div>
          <div className="grid grid-cols-6 gap-4">

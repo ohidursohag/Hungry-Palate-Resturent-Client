@@ -1,31 +1,36 @@
-import useGetCatagory from "../../Hooks/useGetCatagory";
-import capitalizeWords from "../Utilities/capitalizeWords";
+// import useGetCatagory from "../../Hooks/useGetCatagory";
+// import capitalizeWords from "../Utilities/capitalizeWords";
 import PropTypes from 'prop-types'
 
-const SearchAndFilterSection = ({ setSortingOrder, setFilteringCategory }) => {
-   const { data: categories } = useGetCatagory();
+const SearchAndFilterSection = (
+   { setSortingOrder,
+      // setFilteringCategory,
+      query,
+      setQuery,
+      handleSearch,
+      handleKeyDown }) => {
+   // const { data: categories } = useGetCatagory();
    // console.log(categories);
 
-   
+
    return (
       <div className="flex flex-col sm:flex-row justify-end gap-5">
          <div className="flex gap-3 order-2 sm:order-1">
             {/* Filter By Category */}
-            <div >
+            {/* <div >
                <select onChange={(e) => setFilteringCategory(e.target.value)} className="select select-ghost w-[220px] max-w-xs">
-                  <option disabled selected> Category</option>
+                  <option disabled selected value='Category'>Category</option>
                   {
                      categories?.map(category => <option key={category._id} value={category?.categoryName}>{capitalizeWords(category?.categoryName)}</option>)
                   }
-
                </select>
-            </div>
+            </div> */}
             {/* Sort By Price */}
             <div>
                <select onChange={(e) => setSortingOrder(e.target.value)} className="select select-ghost w-[110px] md:w-[150px]  max-w-xs">
                   <option disabled selected>Sort By Price</option>
-                  <option  value='asc'>Low to High</option>
-                  <option  value='desc'>High to low</option>
+                  <option value='asc'>Low to High</option>
+                  <option value='desc'>High to low</option>
                </select>
             </div>
          </div>
@@ -33,11 +38,15 @@ const SearchAndFilterSection = ({ setSortingOrder, setFilteringCategory }) => {
          <div className="order-1 sm:order-2">
             <div className="flex items-center  max-w-md mx-auto bg-gray-100 rounded-lg " >
                <div className="w-full">
-                  <input type="search" className="w-full px-4 py-1 text-gray-800 bg-transparent focus:outline-none"
+                  <input value={query}
+                     onChange={(e) => {
+                        setQuery(e.target.value)
+                        // setFilteringCategory('');
+                     }} onKeyDown={handleKeyDown} type="search" className="w-full px-4 py-1 text-gray-800 bg-transparent focus:outline-none"
                      placeholder="search food" />
                </div>
                <div>
-                  <button type="submit" className="flex items-center bg-[#cda12b] justify-center w-12 h-12 text-white rounded-r-lg"
+                  <button onClick={handleSearch} className="btn  flex items-center bg-[#cda12b] hover:bg-[#cda12b] justify-center w-12 h-12 text-white rounded-r-lg"
                   >
                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
@@ -54,10 +63,13 @@ const SearchAndFilterSection = ({ setSortingOrder, setFilteringCategory }) => {
 };
 
 SearchAndFilterSection.propTypes = {
-   food: PropTypes.object,
+
    setFilteringCategory: PropTypes.func,
    setSortingOrder: PropTypes.func,
-
+   setQuery: PropTypes.func,
+   handleSearch: PropTypes.func,
+   handleKeyDown: PropTypes.func,
+   query: PropTypes.string,
 }
 
 export default SearchAndFilterSection;
