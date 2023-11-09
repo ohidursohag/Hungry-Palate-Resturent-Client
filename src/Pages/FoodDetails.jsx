@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
-import useAxios from "../Hooks/useAxios";
+// import { useQuery } from "@tanstack/react-query";
+// import useAxios from "../Hooks/useAxios";
 import LoadingAnimation from "../Components/Shared/LoadingAnimation/LoadingAnimation";
 import {  useNavigate, useParams } from "react-router-dom";
 import Title from "../Components/Shared/Title";
@@ -7,25 +7,26 @@ import Title2 from "../Components/Shared/Title2";
 import capitalizeWords from "../Components/Utilities/capitalizeWords";
 import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
+import useGetSingleFoodById from "../Hooks/useGetSingleFoodById";
 
 
 const FoodDetails = () => {
    const { id } = useParams()
-   const axios = useAxios()
+   // const axios = useAxios()
    const { user } = useAuth()
    const navigate = useNavigate()
-   console.log(user);
+   console.log(id);
+   const { data: food,isLoading,isError, } = useGetSingleFoodById(id);
+   // const getFoods = async () => {
+   //    const allFoodsData = await axios.get(`/foods/${id}`);
+   //    return allFoodsData.data;
+   // }
 
-   const getFoods = async () => {
-      const allFoodsData = await axios.get(`/foods/${id}`);
-      return allFoodsData.data;
-   }
-
-   // category=${filteringCategory}
-   const { data: food, isLoading, isError } = useQuery({
-      queryKey: ["foodById", id],
-      queryFn: getFoods,
-   });
+   // // category=${filteringCategory}
+   // const { data: food, isLoading, isError } = useQuery({
+   //    queryKey: ["foodById", id],
+   //    queryFn: getFoods,
+   // });
 
    console.log(food);
    // console.log(id);
@@ -42,7 +43,6 @@ const FoodDetails = () => {
             icon: "error",
             title: "Oops...",
             text: "You Cannot order your own Peoducts",
-            footer: '<a href="#">Why do I have this issue?</a>'
          })
          : navigate(`/user/order-food/${id}`)
   }
