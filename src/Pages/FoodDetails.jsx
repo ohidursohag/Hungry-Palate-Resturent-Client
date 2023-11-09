@@ -36,7 +36,16 @@ const FoodDetails = () => {
    if (isError) {
       return <p>Something Went Wrong...</p>
    }
-   
+   const handleOeder = () => {
+      user?.email === food?.chefEmail
+         ? Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "You Cannot order your own Peoducts",
+            footer: '<a href="#">Why do I have this issue?</a>'
+         })
+         : navigate(`/user/order-food/${id}`)
+  }
    return (
       <div className="container mx-auto py-[50px] lg:py-[100px] px-2">
          <div className="mb-8">
@@ -81,7 +90,7 @@ const FoodDetails = () => {
                </div>
                <div >
                   
-                     <button  className="btn btn-outline border-2 my-5 bg-[#282531] border-[#fec834] hover:border-[#fec834]   hover:bg-[#cda12b] font-bold text-gray-200 hover:text-white duration-300 normal-case px-10 text-lg ">Order Now</button>
+                     <button onClick={handleOeder}  className="btn btn-outline border-2 my-5 bg-[#282531] border-[#fec834] hover:border-[#fec834]   hover:bg-[#cda12b] font-bold text-gray-200 hover:text-white duration-300 normal-case px-10 text-lg ">Order Now</button>
                   
                   
                </div>
