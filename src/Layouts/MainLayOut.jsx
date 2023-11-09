@@ -2,6 +2,7 @@ import { Outlet, useNavigation } from "react-router-dom";
 import NavBar from "../Components/Shared/NavbarComponents/NavBar";
 import SideBar from "../Components/Shared/NavbarComponents/SideBar";
 import LoadingAnimation from "../Components/Shared/LoadingAnimation/LoadingAnimation";
+import Footer from "../Components/Home/Footer/Footer";
 
 
 const MainLayOut = () => {
@@ -11,12 +12,14 @@ const MainLayOut = () => {
          <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
          <div className="drawer-content flex flex-col">
             {/* Navbar */}
-            <NavBar></NavBar>
+            <NavBar/>
             {/* Page content here */}
-            {
-               navigation.state === 'loading' ? <LoadingAnimation /> : <Outlet></Outlet>
-            }
-
+            <div>
+               {
+                  navigation.state === 'loading' ? <LoadingAnimation /> : <Outlet></Outlet>
+               }
+            </div>
+               <Footer/>
          </div>
          <SideBar></SideBar>
       </div>
