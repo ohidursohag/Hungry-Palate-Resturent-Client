@@ -4,7 +4,7 @@ import useAuth from "../../Hooks/useAuth";
 import PropTypes from 'prop-types'
 
 const FoodOrderDataForm = ({ food }) => {
-   console.log(food);
+   // console.log(food);
    const [avilableQuantity, setAvilableQuantity] = useState(food?.availableQuantity-1);
    const [orderQuantity, setOrderQuantity] = useState(1);
    const { user } = useAuth()

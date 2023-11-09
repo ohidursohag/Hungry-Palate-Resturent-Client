@@ -12,23 +12,13 @@ import useGetSingleFoodById from "../Hooks/useGetSingleFoodById";
 
 const FoodDetails = () => {
    const { id } = useParams()
-   // const axios = useAxios()
    const { user } = useAuth()
    const navigate = useNavigate()
    console.log(id);
    const { data: food,isLoading,isError, } = useGetSingleFoodById(id);
-   // const getFoods = async () => {
-   //    const allFoodsData = await axios.get(`/foods/${id}`);
-   //    return allFoodsData.data;
-   // }
 
-   // // category=${filteringCategory}
-   // const { data: food, isLoading, isError } = useQuery({
-   //    queryKey: ["foodById", id],
-   //    queryFn: getFoods,
-   // });
 
-   console.log(food);
+   // console.log(food);
    // console.log(id);
 
    if (isLoading) {

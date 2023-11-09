@@ -21,15 +21,18 @@ const OrderFoodItem = () => {
          return axios.post('/user/order-food', orderdFoodData)
       }     
    })
-   console.log(isSuccess);
+   // console.log(isSuccess);
    if (isLoading) {
       return <LoadingAnimation></LoadingAnimation>
    }
    if (isError) {
       return <p>Something Went Wrong...</p>
    }
+
+
    // console.log(food);
-   const handleOrderFoodItem = (e) => {
+   // console.log(food?.foodImage);
+   const handleOrderFoodItem =async (e) => {
       e.preventDefault();
       const form = e.target;
       const orderdFoodData = {
@@ -38,8 +41,12 @@ const OrderFoodItem = () => {
          foodPrice: form.foodPrice.value ,
          date: form.date.value ,
          customerName: form.customerName.value ,
-         customerEmail: form.customerEmail.value ,
+         customerEmail: form.customerEmail.value,
+         ownerName: food?.chefName || 'Not Avilable',
+         ownerEmail: food?.chefEmail || 'Not Avilable',
+         foodImage: food?.foodImage,
       }
+      
       mutate(orderdFoodData)
       if (isSuccess) {
          Swal.fire({
