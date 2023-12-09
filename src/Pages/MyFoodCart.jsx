@@ -3,6 +3,7 @@ import useAxios from "../Hooks/useAxios";
 import LoadingAnimation from "../Components/Shared/LoadingAnimation/LoadingAnimation";
 import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 
 const MyFoodCart = () => {
@@ -74,60 +75,74 @@ const MyFoodCart = () => {
 console.log(orderData);
 
    return (
-      <div className="container mx-auto px-2">
-         <div className="overflow-x-auto">
-            <table className="table">
-               {/* head */}
-               <thead>
-                  <tr>
-                     <th>Image</th>
-                     <th>Food Name</th>
-                     <th>Price</th>
-                     <th>Orderd Date</th>
-                     <th>Food Owner</th>
-                     <th>Order Quantity</th>
-                     <th></th>
-                     <th></th>
-                  </tr>
-               </thead>
-               <tbody>
-                  {/* row 1 */}
-                  {
-                     orderData?.map(data => <tr key={data?._id}>
-                        <td>
-                           <div className="avatar">
-                              <div className="mask  w-20 h-16">
-                                 <img src={data?.foodImage} />
-                              </div>
-                           </div>
-                        </td>
-                        <td>
-                           <div>
-                              <div className="font-bold">{data?.foodName}</div>
-                           </div>
-                        </td>
-                        <td>
-                           <div className="badge badge-ghost badge-sm">${data?.foodPrice}</div>
-                        </td>
-                        <td>{data?.date}</td>
-                        <td>
-                           <div>
-                              <div className="font-bold">{data?.ownerName}</div>
-                              <div className="text-sm opacity-50">{data?.ownerEmail}</div>
-                           </div>
-                        </td>
-                        <td>
-                           <div className="font-bold">{data?.orderQuantity
-}</div>
-                        </td>
-                        <th>
-                           <button onClick={() => handleDeleteCartItem(data?._id)} className="btn btn-ghost btn-xs">delete</button>
-                        </th>
-                     </tr> )
-                  }                 
-               </tbody>
-            </table>
+      <div>
+         <Helmet>
+            <meta charSet="utf-8" />
+            <title>My Cart</title>
+            <link rel="canonical" href="http://mysite.com/example" />
+         </Helmet>
+         <div>
+            {
+               orderData?.length > 0 
+                  ? <div className="container mx-auto px-2 py-[120px] min-h-[calc(100vh-100px)]">
+                     <div className="overflow-x-auto">
+                        <table className="table">
+                           {/* head */}
+                           <thead>
+                              <tr>
+                                 <th>Image</th>
+                                 <th>Food Name</th>
+                                 <th>Price</th>
+                                 <th>Orderd Date</th>
+                                 <th>Food Owner</th>
+                                 <th>Order Quantity</th>
+                                 <th></th>
+                                 <th></th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              {/* row 1 */}
+                              {
+                                 orderData?.map(data => <tr key={data?._id}>
+                                    <td>
+                                       <div className="avatar">
+                                          <div className="mask  w-20 h-16">
+                                             <img src={data?.foodImage} />
+                                          </div>
+                                       </div>
+                                    </td>
+                                    <td>
+                                       <div>
+                                          <div className="font-bold">{data?.foodName}</div>
+                                       </div>
+                                    </td>
+                                    <td>
+                                       <div className="badge badge-ghost badge-sm">${data?.foodPrice}</div>
+                                    </td>
+                                    <td>{data?.date}</td>
+                                    <td>
+                                       <div>
+                                          <div className="font-bold">{data?.ownerName}</div>
+                                          <div className="text-sm opacity-50">{data?.ownerEmail}</div>
+                                       </div>
+                                    </td>
+                                    <td>
+                                       <div className="font-bold">{data?.orderQuantity
+                                       }</div>
+                                    </td>
+                                    <th>
+                                       <button onClick={() => handleDeleteCartItem(data?._id)} className="btn btn-ghost btn-xs">delete</button>
+                                    </th>
+                                 </tr>)
+                              }
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  : <div className="min-h-[calc(100vh-100px)] flex items-center justify-center text-3xl font-bold">No Data Found</div>
+            }
          </div>
+         
       </div>
    )
 }

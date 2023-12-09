@@ -6,6 +6,7 @@ import useGetSingleFoodById from "../Hooks/useGetSingleFoodById";
 import Swal from "sweetalert2";
 import useAxios from "../Hooks/useAxios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Helmet } from "react-helmet";
 
 
 
@@ -75,13 +76,20 @@ const UpdateFooditem = () => {
 
   
    return (
-      <div className="container mx-auto py-10 px-2">
-         <div className="my-10">
-            <Title>Update Food Items</Title>
+      <div>
+         <Helmet>
+            <meta charSet="utf-8" />
+            <title>Hungry Plate | Update Food</title>
+            <link rel="canonical" href="http://mysite.com/example" />
+         </Helmet>
+         <div className="container mx-auto py-[120px] px-2">
+            <div className="my-10">
+               <Title>Update Food Items</Title>
+            </div>
+            <form onSubmit={handleUpdateFoodItem} className="bg-[#DCB342]/70 backdrop-blur-sm rounded">
+               <FoodItemDataForm buttonName={'Update'} existingfoodData={existingfoodData}></FoodItemDataForm>
+            </form>
          </div>
-         <form onSubmit={handleUpdateFoodItem} className="bg-[#DCB342]/70 backdrop-blur-sm rounded">
-            <FoodItemDataForm buttonName={'Update'} existingfoodData={existingfoodData}></FoodItemDataForm>
-         </form>
       </div>
    )
 }

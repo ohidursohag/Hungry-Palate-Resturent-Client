@@ -1,4 +1,4 @@
-import { Outlet, useNavigation } from "react-router-dom";
+import { Outlet,  useNavigation } from "react-router-dom";
 import NavBar from "../Components/Shared/NavbarComponents/NavBar";
 import SideBar from "../Components/Shared/NavbarComponents/SideBar";
 import LoadingAnimation from "../Components/Shared/LoadingAnimation/LoadingAnimation";
@@ -7,6 +7,9 @@ import Footer from "../Components/Home/Footer/Footer";
 
 const MainLayOut = () => {
    const navigation = useNavigation()
+
+
+
    return (
       <div className="drawer drawer-end font-roboto-slab">
          <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />

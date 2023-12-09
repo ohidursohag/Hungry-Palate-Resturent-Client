@@ -6,6 +6,7 @@ import LoadingAnimation from "../Components/Shared/LoadingAnimation/LoadingAnima
 import { useMutation } from "@tanstack/react-query";
 import useAxios from "../Hooks/useAxios";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 // import useAxios from "../Hooks/useAxios";
 
 
@@ -70,13 +71,20 @@ const OrderFoodItem = () => {
 
    }
    return(
-      <div className="container mx-auto py-10 px-2">
-         <div className="my-10">
-            <Title>Order Food</Title>
+      <div>
+         <Helmet>
+            <meta charSet="utf-8" />
+            <title>Order Food</title>
+            <link rel="canonical" href="http://mysite.com/example" />
+         </Helmet>
+         <div className="container mx-auto py-[120px] px-2">
+            <div className="my-10">
+               <Title>Order Food</Title>
+            </div>
+            <form onSubmit={handleOrderFoodItem} className="bg-[#DCB342]/70 backdrop-blur-sm rounded">
+               <FoodOrderDataForm buttonName={'Add Item'} food={food}></FoodOrderDataForm>
+            </form>
          </div>
-         <form onSubmit={handleOrderFoodItem} className="bg-[#DCB342]/70 backdrop-blur-sm rounded">
-            <FoodOrderDataForm buttonName={'Add Item'} food={food}></FoodOrderDataForm>
-         </form>
       </div>
    )}
 export default OrderFoodItem;

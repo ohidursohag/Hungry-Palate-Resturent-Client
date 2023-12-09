@@ -7,6 +7,7 @@ import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { updateProfile } from "firebase/auth";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet";
 
 const Register = () => {
    const [showPass, setShowPass] = useState(false);
@@ -96,9 +97,14 @@ const toastId = toast.loading('Registering ...')
             toast.error(error.message, { id: toastId });
          })
    }
-   return(
+   return (
       <div>
-         <div className="container mx-auto flex min-h-[calc(100vh-100px)]  items-center justify-center px-2 py-10">
+         <Helmet>
+            <meta charSet="utf-8" />
+            <title>Hungry Plate | Register</title>
+            <link rel="canonical" href="http://mysite.com/example" />
+         </Helmet>
+         <div className="container mx-auto flex min-h-[calc(100vh-100px)]  items-center justify-center px-2 py-[120px]">
             <div className="hidden md:block">
                <Lottie className=" " animationData={login} loop={true} />
             </div>

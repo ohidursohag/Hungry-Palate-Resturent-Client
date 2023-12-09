@@ -1,12 +1,18 @@
 
 import { useNavigate, useRouteError } from "react-router-dom";
 import error404 from '../assets/image/error404.png'
+import { Helmet } from "react-helmet";
 const Error = () => {
    const navigate = useNavigate()
    const error = useRouteError()
    console.log(error);
    return (
       <div className="bg-[#cda12b]">
+         <Helmet>
+            <meta charSet="utf-8" />
+            <title>Error</title>
+            <link rel="canonical" href="http://mysite.com/example" />
+         </Helmet>
          <div className="container mx-auto min-h-screen flex  flex-col justify-center items-center gap-10 px-5">
             <figure>
                <img src={error404} alt="" />

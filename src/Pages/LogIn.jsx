@@ -5,6 +5,7 @@ import Lottie from "lottie-react";
 import login from "../assets/Lottie/loginPage.json";
 import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet";
 
 
 const LogIn = () => {
@@ -50,7 +51,12 @@ const LogIn = () => {
    }
    return(
       <div>
-         <div className="container mx-auto flex min-h-[calc(100vh-100px)] items-center justify-center px-2">
+         <Helmet>
+            <meta charSet="utf-8" />
+            <title>Hungry Plate | Login</title>
+            <link rel="canonical" href="http://mysite.com/example" />
+         </Helmet>
+         <div className="container mx-auto flex min-h-[calc(100vh-100px)] items-center justify-center py-[120px] px-2">
             <div className="hidden md:block">
                <Lottie className=" " animationData={login} loop={true} />
             </div>

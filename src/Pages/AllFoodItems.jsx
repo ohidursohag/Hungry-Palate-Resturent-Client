@@ -5,6 +5,7 @@ import Title from "../Components/Shared/Title";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../Hooks/useAxios";
 import LoadingAnimation from "../Components/Shared/LoadingAnimation/LoadingAnimation";
+import { Helmet } from "react-helmet";
 // import Swal from "sweetalert2";
 
 
@@ -69,39 +70,46 @@ const AllFoodItems = () => {
    }
 
    return (
-      <div className="container mx-auto py-[100px] px-2">
-         <div className="mb-5">
-            <Title>All Food Items</Title>
-         </div>
-         <div>
-            <SearchAndFilterSection setSortingOrder={setSortingOrder} setFilteringCategory={setFilteringCategory} handleSearch={handleSearch} handleKeyDown={handleKeyDown} query={query} setQuery={setQuery}></SearchAndFilterSection>
-         </div>
-         <div>
-            <div >
-               {
-                  allFoods?.result.length
-                     ? <div className="grid grid-cols-6 gap-4">
-                        {
-                           allFoods?.result?.map(food => <FoodCard key={food._id} food={food} ></FoodCard>)
-                        }
-                     </div>
-                     : <div className="w-full h-[300px] flex justify-center items-center text-3xl font-bold">No Matched Data Found</div>
-               }
+      <div>
+         <Helmet>
+            <meta charSet="utf-8" />
+            <title>Hungry Palate | All Foods</title>
+            <link rel="canonical" href="http://mysite.com/example" />
+         </Helmet>
+         <div className="container mx-auto py-[160px] px-2">
+            <div className="mb-5">
+               <Title>All Food Items</Title>
             </div>
-         </div>
-         {/* Pagination */}
-         <div className=" flex justify-center">
-            <div className="join my-7 ">
-               <button onClick={handlePrevious} className="join-item btn">{'<<'}</button>
-               {
-                  pageArray?.map((item, index) => {
-                     const pageNumber = index + 1;
-                     return (
-                        <button key={pageNumber} onClick={() => setPage(pageNumber)} className={`${pageNumber === page ? 'join-item btn btn-primary bg-[#DCB342] hover:bg-[#DCB342] border-none' : 'join-item btn'}`}>{pageNumber}</button>
-                     )
-                  })
-               }
-               <button onClick={handleNext} className="join-item btn">{'>>'}</button>
+            <div>
+               <SearchAndFilterSection setSortingOrder={setSortingOrder} setFilteringCategory={setFilteringCategory} handleSearch={handleSearch} handleKeyDown={handleKeyDown} query={query} setQuery={setQuery}></SearchAndFilterSection>
+            </div>
+            <div>
+               <div >
+                  {
+                     allFoods?.result.length
+                        ? <div className="grid grid-cols-6 gap-4">
+                           {
+                              allFoods?.result?.map(food => <FoodCard key={food._id} food={food} ></FoodCard>)
+                           }
+                        </div>
+                        : <div className="w-full h-[300px] flex justify-center items-center text-3xl font-bold">No Matched Data Found</div>
+                  }
+               </div>
+            </div>
+            {/* Pagination */}
+            <div className=" flex justify-center">
+               <div className="join my-7 ">
+                  <button onClick={handlePrevious} className="join-item btn">{'<<'}</button>
+                  {
+                     pageArray?.map((item, index) => {
+                        const pageNumber = index + 1;
+                        return (
+                           <button key={pageNumber} onClick={() => setPage(pageNumber)} className={`${pageNumber === page ? 'join-item btn btn-primary bg-[#DCB342] hover:bg-[#DCB342] border-none' : 'join-item btn'}`}>{pageNumber}</button>
+                        )
+                     })
+                  }
+                  <button onClick={handleNext} className="join-item btn">{'>>'}</button>
+               </div>
             </div>
          </div>
       </div>

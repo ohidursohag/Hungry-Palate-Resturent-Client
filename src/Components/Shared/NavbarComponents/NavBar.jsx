@@ -5,8 +5,8 @@ import LoginAndProfile from './LoginAndProfile';
 import { Link } from 'react-router-dom';
 const NavBar = () => {
    return (
-      <div>
-         <div className="container mx-auto navbar py-5  justify-between">
+      <div className='absolute w-full top-0 left-0 z-10 bg-slate-50/30 backdrop-blur-sm'>
+         <div className="container mx-auto navbar py-5  justify-between ">
 
             <Link to="/">
                <img className='w-[150px]' src={logo} alt="" />

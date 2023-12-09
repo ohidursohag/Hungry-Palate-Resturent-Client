@@ -3,6 +3,7 @@ import FoodItemDataForm from "../Components/Forms/FoodItemDataForm";
 import Title from "../Components/Shared/Title";
 import useAxios from "../Hooks/useAxios";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 
 const AddFoodItems = () => {
@@ -54,13 +55,20 @@ const AddFoodItems = () => {
       mutate(newFoodItem)
    }
    return (
-      <div className="container mx-auto py-10 px-2">
-         <div className="my-10">
-            <Title>Add Food Items</Title>
+      <div>
+         <Helmet>
+            <meta charSet="utf-8" />
+            <title>Add New Food</title>
+            <link rel="canonical" href="http://mysite.com/example" />
+         </Helmet>
+         <div className="container mx-auto py-[160px] px-2">
+            <div className="my-10">
+               <Title>Add Food Items</Title>
+            </div>
+            <form onSubmit={handleAddNewFoodItem} className="bg-[#DCB342]/70 backdrop-blur-sm rounded">
+               <FoodItemDataForm buttonName={'Add Item'}></FoodItemDataForm>
+            </form>
          </div>
-         <form onSubmit={handleAddNewFoodItem} className="bg-[#DCB342]/70 backdrop-blur-sm rounded">
-            <FoodItemDataForm buttonName={'Add Item'}></FoodItemDataForm>
-         </form>
       </div>
    )
 }
